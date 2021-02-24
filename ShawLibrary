@@ -1,0 +1,70 @@
+print("\n \t \t                           **************** Welcome TO 'SHAW LIBRARY SYSTEM' ****************** ")
+print("\nFor Displaying Books, Press 'd'"
+      "\nFor LEND a Book, Press 'l'"
+      "\nFor RETURN a Book, Press 'r'"
+      "\nFor ADD a Book, Press 'a'"
+      "\nFor EXIT the System, Press 'q'")
+
+
+class Library:
+    def __init__(self,list):
+        self.list = list
+        self.lendDict = {}
+
+
+    def display_book(self):
+        print("The Available Books are :")
+        for i , books in enumerate(self.list):
+            if i != 0:
+                print(f" {i}.{books}")
+
+
+    def lend_book(self,book,reader):
+        if book not in self.lendDict.keys():
+            self.lendDict.update({book: reader})
+            print("Lender-Book database has been updated. You can take the book now")
+        else:
+            print(f"Book is already being used by {self.lendDict[book]}")
+
+
+    def add_book(self,book_names):
+        self.list.append(book_names)
+
+
+    def return_book(self, book):
+        self.lendDict.pop(book)
+
+
+def main():
+    list_books = ['','Cooking book', 'Sherlock Holmes', 'Feluda', 'Shiva Trilogy', 'Ramayana', 'Mahabharat','Gita' , 'Harry potter']
+    library_name = "Shaw"
+    Shaw = Library(list_books)
+    while 1:
+        a = input("\nEnter a Option:\t")
+        if a == "d":
+            Shaw.display_book()
+
+        elif a == "l":
+            b = input("What is your Name:\t")
+            c= input("Which Book Do you want to lend:\t")
+            Shaw.lend_book(c,b)
+
+        elif a == "r":
+            c = input("Which Book Do you want to return:\t")
+            Shaw.return_book(c)
+            print("\nBook Returned")
+
+        elif a == "a":
+            book_name = input("Book name :\t")
+            print("\nBook Added")
+            Shaw.add_book(book_name)
+            continue
+
+        elif a == "q":
+            exit()
+
+        else:
+            print("Wrong Option !!!!!!!!!!!!")
+
+if __name__ == '__main__':
+    main()
